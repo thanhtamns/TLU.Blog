@@ -1,7 +1,7 @@
-﻿@using TLU.Blog.DataModels;
+﻿@using TLU.Blog.Models.DataModels
 
 <h4>Responses</h4>
-@foreach (var item in (new CommentModel().GetCommentOrderByDate(ViewBag.PostId) as List<TLU.Blog.Data.Comment>))
+@foreach (var item in (new CommentModel().GetCommentOrderByDate(ViewBag.PostId) as List<TLU.Blog.Models.DataBase.Comment>))
             {
     <div class="media response-info">
 

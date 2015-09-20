@@ -1,5 +1,5 @@
-﻿@model TLU.Blog.Data.Post
-@using TLU.Blog.DataModels;
+﻿@model TLU.Blog.Models.DataBase.Post
+@using TLU.Blog.Models.DataModels;
 @{ 
     const int AccountId = 15;
     ViewBag.Votes = new VotesModel().IsLike(AccountId, Model.ID);

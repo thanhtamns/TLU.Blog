@@ -1,7 +1,7 @@
-﻿@model TLU.Blog.Data.Post
+﻿@model TLU.Blog.Models.DataBase.Post
 @using TLU.Blog.Helpers;
-@using TLU.Blog.DataModels;
-@using TLU.Blog.Data;
+@using TLU.Blog.Models.DataModels;
+@using TLU.Blog.Models.DataBase;
 @{
     ViewBag.Title = "Post";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -83,7 +83,7 @@
         </div>
         <div class="response">
             <h4>Responses</h4>
-            @foreach (var item in (new CommentModel().GetCommentOrderByDate(Model.ID) as List<TLU.Blog.Data.Comment>))
+            @foreach (var item in (new CommentModel().GetCommentOrderByDate(Model.ID) as List<TLU.Blog.Models.DataBase.Comment>))
             {
                 <div class="media response-info">
                     

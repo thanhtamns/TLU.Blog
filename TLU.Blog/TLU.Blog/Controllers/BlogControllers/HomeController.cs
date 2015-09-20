@@ -11,7 +11,7 @@ namespace TLU.Blog.Controllers
 {
     public class HomeController : BaseController
     {
-        ThangLongEntities _db;
+        private ThangLongEntities _db;
         public HomeController()
         {
             _db = new ThangLongEntities();

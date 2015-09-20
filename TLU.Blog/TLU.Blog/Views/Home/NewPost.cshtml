@@ -3,10 +3,10 @@
     ViewBag.Title = "Awnser";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
-@model TLU.Blog.DataViews.PostView
+@model TLU.Blog.Models.DataViews.PostView
 @using TLU.Blog.Helpers;
-@using TLU.Blog.DataModels;
-@using TLU.Blog.Data;
+@using TLU.Blog.Models.DataModels;
+@using TLU.Blog.Models.DataBase;
 <div class="blog-head">
     <h2>@TLUResourceManager.GetValueByKey("New Post")</h2>
 </div>
