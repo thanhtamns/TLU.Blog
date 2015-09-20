@@ -14,10 +14,48 @@ namespace TLU.Blog
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "AutoCountLike",
+                url: "AutoCountLike/{pPostId}",
+                defaults: new { controller = "Home", action = "AutoCountLike", pPostId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "AutoListComment",
+                url: "AutoListComment/{pPostId}",
+                defaults: new { controller = "Home", action = "AutoListComment", pPostId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "CountComment",
+                url: "CountComment/{pPostId}",
+                defaults: new { controller = "Home", action = "CountComment", pPostId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "New_Comment",
+                url: "New_Comment/{pContent}/{pPostId}",
+                defaults: new { controller = "Home", action = "ViewComment", pContent = UrlParameter.Optional, pPostId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "ViewReply",
+                url: "ViewReply/{pReplyContent}/{pCommentId}",
+                defaults: new { controller = "Home", action = "ViewReply", pReplyContent = UrlParameter.Optional, pCommentId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Home",
+                url: "{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }
