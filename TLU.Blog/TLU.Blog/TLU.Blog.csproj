@@ -1206,19 +1206,6 @@
     <Content Include="Contents\BlogContents\touchTouch.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DataBase\ThangLongEntities.Context.tt">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ThangLongEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DataBase\ThangLongEntities.edmx.diagram">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataBase\ThangLongEntities.tt">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ThangLongEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1254,78 +1241,6 @@
     <Compile Include="Helpers\BlogLang.cs" />
     <Compile Include="Helpers\TLUCultureEnum.cs" />
     <Compile Include="Helpers\TLUResourceManager.cs" />
-    <Compile Include="Models\DataBase\About.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Account.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Comment.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Config.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\FeelBack.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\History.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Image.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Level.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Navigation.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Post.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Profile.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Rule.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\sysdiagram.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Tag.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\ThangLongEntities.Context.cs">
-      <DependentUpon>ThangLongEntities.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\DataBase\ThangLongEntities.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\DataBase\ThangLongEntities.Designer.cs">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\DataBase\Topic.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\UpImage.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\Vote.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DataModels\AccountModel.cs" />
     <Compile Include="Models\DataModels\CommentModel.cs" />
     <Compile Include="Models\DataModels\PostModel.cs" />
@@ -1585,8 +1500,8 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\AdminAbout\Create.cshtml" />
-    <Content Include="Views\AdminAbout\Index.cshtml" />
+    <Content Include="Resource\AdminAbout\Create.cshtml" />
+    <Content Include="Resource\AdminAbout\Index.cshtml" />
     <Content Include="Views\AdminAccount\Home.cshtml" />
     <Content Include="Views\AdminComment\Home.cshtml" />
     <Content Include="Views\AdminConfigs\Home.cshtml" />
@@ -1623,12 +1538,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resource\TLUResource.en.resx" />
     <EmbeddedResource Include="Resource\TLUResource.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\DataBase\ThangLongEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ThangLongEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
