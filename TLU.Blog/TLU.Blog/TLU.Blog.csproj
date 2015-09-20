@@ -1201,6 +1201,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminAboutController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminAccountController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminAccoutController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminCommentController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminConfigsController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminFeelBackController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminHistoryController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminImageController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminLevelController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminLogInController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminNavigationController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminPostsController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminProfileController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminRuleController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminTagController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminTopicController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminUpImageController.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminVotesController.cs" />
+    <Compile Include="Controllers\BlogControllers\BaseController.cs" />
+    <Compile Include="Controllers\BlogControllers\HomeController.cs" />
+    <Compile Include="Controllers\BlogControllers\LogInController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1432,8 +1456,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\AdminControllers\" />
-    <Folder Include="Controllers\BlogControllers\" />
     <Folder Include="Helper\" />
     <Folder Include="Models\DataModel\" />
     <Folder Include="Models\DataView\" />
