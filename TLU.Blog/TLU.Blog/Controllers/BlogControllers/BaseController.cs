@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using TLU.Blog.Data;
+using TLU.Blog.Models.DataBase;
 using TLU.Blog.Helpers;
 
 namespace TLU.Blog.Controllers

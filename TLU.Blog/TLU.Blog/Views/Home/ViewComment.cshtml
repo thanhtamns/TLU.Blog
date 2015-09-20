@@ -1,0 +1,80 @@
+﻿@using TLU.Blog.DataModels;
+
+<h4>Responses</h4>
+@foreach (var item in (new CommentModel().GetCommentOrderByDate(ViewBag.PostId) as List<TLU.Blog.Data.Comment>))
+            {
+    <div class="media response-info">
+
+        @*Thong Tin*@
+
+        <div class="media-left response-text-left">
+            <a href="#">
+                <img class="media-object" src="@item.Account.Profile.Avatar" alt="" />
+            </a>
+            <h5><a href="#">@(new AccountModel().GetNameById(item.AccountID))</a></h5>
+        </div>
+
+        @*noi Dung*@
+
+        <div class="media-body response-text-right">
+            <p>
+                @item.CommentContent
+            </p>
+            <ul>
+                <li>@item.CommentDate</li>
+                <li><a id="sentReply_@item.ID">Reply</a></li>
+            </ul>
+            <script>
+                            $(document).ready(function(){
+                                $("#Reply_@item.ID").hide();
+                                $("#sentReply_@item.ID").click(function () {
+                                    $("#Reply_@item.ID").toggle();
+                                });
+                            });
+            </script>
+            <div id="ReplyContent_@item.ID">
+                @foreach (var item2 in (new CommentModel().GetList(item.ID)))
+                {
+                    <div class="media response-info">
+                        <div class="media-left response-text-left">
+                            <a href="#">
+                                <img class="media-object" src="@item2.Account.Profile.Avatar" alt="" />
+                            </a>
+                            <h5><a href="#">@(new AccountModel().GetNameById(item2.AccountID))</a></h5>
+                        </div>
+                        <div class="media-body response-text-right">
+                            <p>
+                                @item2.CommentContent
+                            </p>
+                            <ul>
+                                <li>@item2.CommentDate</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                }
+            </div>
+            <div class="media-body response-text-right" id="NewComment_@item.ID">
+                <div class="form-group" id="Reply_@item.ID">
+                    <p>New Reply</p>
+                    <textarea id="textarea" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                    <ul>
+                        <li><a id="CommentReply_@item.ID">Comment</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#CommentReply_@item.ID").click(function () {
+                        var text = document.getElementById("textarea").value;
+                        var str = '/ViewReply/' + text +'/' + @item.ID;
+                        $("#ReplyContent_@item.ID").load(str);
+                        $("#Reply_@item.ID").toggle();
+                        document.getElementById("textarea").value="";
+                    });
+                });
+            </script>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+}

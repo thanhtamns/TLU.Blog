@@ -1,0 +1,93 @@
+﻿@model TLU.Blog.Data.Account
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div style="margin-left:500px">
+    <h2>Đăng ký</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Account</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName)
+                    @Html.ValidationMessageFor(model => model.UserName)
+                    <span id="LoiUserName"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                    <span id="LoiPassword"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LangId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LangId)
+                    @Html.ValidationMessageFor(model => model.LangId)
+                    <span id="LoiLangId"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="tbnSubmit" type="submit" value="Đăng ký" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+</div>
+
+@*<script type="text/javascript">
+    $('#tbnSubmit').click(function () {
+        var loi = 0;
+        if($('#UserName').val()=="")
+        {
+            $('#LoiUserName').text("Bạn chưa nhập UserName !");
+            loi++;
+        }
+        else
+        {
+            $('#LoiUserName').text("");
+        }
+        if ($('#Password').val() == "") {
+            $('#LoiPassword').text("Bạn chưa nhập Password !");
+            loi++;
+        }
+        else
+        {
+            $('#LoiPassword').text("");
+        }
+        if ($('#LangId').val() == "") {
+            $('#LoiLangId').text("Bạn chưa nhập LangId !");
+            loi++;
+        }
+        else
+        {
+            $('#LoiLangId').text("");
+        }
+        if(loi!=0)
+            return false;
+        return true;
+    });
+</script>*@

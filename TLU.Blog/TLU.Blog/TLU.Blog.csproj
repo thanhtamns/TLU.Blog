@@ -56,6 +56,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -1196,7 +1204,21 @@
     <Content Include="Contents\BlogContents\starter.html" />
     <Content Include="Contents\BlogContents\style.css" />
     <Content Include="Contents\BlogContents\touchTouch.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
+    <Content Include="Models\DataBase\ThangLongEntities.Context.tt">
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ThangLongEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataBase\ThangLongEntities.edmx.diagram">
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DataBase\ThangLongEntities.tt">
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ThangLongEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1228,7 +1250,90 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BlogCookies.cs" />
+    <Compile Include="Helpers\BlogLang.cs" />
+    <Compile Include="Helpers\TLUCultureEnum.cs" />
+    <Compile Include="Helpers\TLUResourceManager.cs" />
+    <Compile Include="Models\DataBase\About.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Account.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Comment.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Config.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\FeelBack.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\History.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Image.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Level.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Navigation.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Post.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Profile.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Rule.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\sysdiagram.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Tag.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\ThangLongEntities.Context.cs">
+      <DependentUpon>ThangLongEntities.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\DataBase\ThangLongEntities.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\DataBase\ThangLongEntities.Designer.cs">
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\DataBase\Topic.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\UpImage.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\Vote.cs">
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\AccountModel.cs" />
+    <Compile Include="Models\DataModels\CommentModel.cs" />
+    <Compile Include="Models\DataModels\PostModel.cs" />
+    <Compile Include="Models\DataModels\TopicModel.cs" />
+    <Compile Include="Models\DataModels\VotesModel.cs" />
+    <Compile Include="Models\DataViews\PostView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\TLUResource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1447,6 +1552,58 @@
     <Content Include="Contents\AdminContents\plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="Contents\AdminContents\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Contents\AdminContents\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Views\Shared\AdminMenu.cshtml" />
+    <Content Include="Views\Shared\dropdown-menu.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\LogIn.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Profile1.cshtml" />
+    <Content Include="Views\Shared\_Profile2.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AutoCountLike.cshtml" />
+    <Content Include="Views\Home\AutoListComment.cshtml" />
+    <Content Include="Views\Home\Awnser.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\DangKy.cshtml" />
+    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\New.cshtml" />
+    <Content Include="Views\Home\NewPost.cshtml" />
+    <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Home\ViewComment.cshtml" />
+    <Content Include="Views\Home\ViewLike.cshtml" />
+    <Content Include="Views\Home\ViewReply.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\AdminAbout\Create.cshtml" />
+    <Content Include="Views\AdminAbout\Index.cshtml" />
+    <Content Include="Views\AdminAccount\Home.cshtml" />
+    <Content Include="Views\AdminComment\Home.cshtml" />
+    <Content Include="Views\AdminConfigs\Home.cshtml" />
+    <Content Include="Views\AdminFeelBack\Home.cshtml" />
+    <Content Include="Views\AdminHistory\Home.cshtml" />
+    <Content Include="Views\AdminHome\Home.cshtml" />
+    <Content Include="Views\AdminImage\Home.cshtml" />
+    <Content Include="Views\AdminLevel\Home.cshtml" />
+    <Content Include="Views\AdminLogIn\logIn.cshtml" />
+    <Content Include="Views\AdminNavigation\Home.cshtml" />
+    <Content Include="Views\AdminPosts\Home.cshtml" />
+    <Content Include="Views\AdminProfile\Home.cshtml" />
+    <Content Include="Views\AdminRule\Home.cshtml" />
+    <Content Include="Views\AdminTag\Home.cshtml" />
+    <Content Include="Views\AdminTopic\Home.cshtml" />
+    <Content Include="Views\AdminUpImage\Home.cshtml" />
+    <Content Include="Views\AdminVotes\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1456,12 +1613,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helper\" />
-    <Folder Include="Models\DataModel\" />
-    <Folder Include="Models\DataView\" />
+    <Folder Include="Views\AdminBase\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\LogIn\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\TLUResource.en.resx" />
+    <EmbeddedResource Include="Resource\TLUResource.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\DataBase\ThangLongEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ThangLongEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

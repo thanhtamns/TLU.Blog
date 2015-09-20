@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div style="margin-left:500px">
+    <h2>Đăng nhập</h2>
+    <span>@ViewBag.ThongBao</span>
+    <br /><br />
+    @using (Html.BeginForm())
+    {
+    <span>UserName: </span>@Html.TextBox("txtTaiKhoan");
+        <br /><br />
+         <span>PassWord:  </span>@Html.TextBox("txtMatKhau");
+        <br /><br />
+    <div style="margin-left:90px">
+        <input type="submit" id="btnSubmit" value="Đăng nhập" name="btnSubmit" />
+    </div>
+    }
+
+</div>

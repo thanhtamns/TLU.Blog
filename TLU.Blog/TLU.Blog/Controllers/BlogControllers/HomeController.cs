@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TLU.Blog.Data;
+using TLU.Blog.Models.DataBase;
 using System.Web;
 using System.Web.Mvc;
 using TLU.Blog.Helpers;
-using TLU.Blog.DataViews;
-using TLU.Blog.DataModels;
+using TLU.Blog.Models.DataViews;
+using TLU.Blog.Models.DataModels;
 namespace TLU.Blog.Controllers
 {
     public class HomeController : BaseController
@@ -73,7 +73,7 @@ namespace TLU.Blog.Controllers
                 string a = "/Image/" + file.FileName;
                 string b = Server.MapPath(a);
                 file.SaveAs(b);
-                var Object = new Data.Post();
+                var Object = new Post();
                 Object.Descrip = pNewPost.pDescrip;
                 Object.PostContent = pNewPost.pContent;
                 Object.TopicID = new TopicModel().GetIdByName(pNewPost.pNameTopic);

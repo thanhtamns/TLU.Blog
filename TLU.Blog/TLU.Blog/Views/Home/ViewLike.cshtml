@@ -1,0 +1,30 @@
+﻿@model TLU.Blog.Data.Post
+@using TLU.Blog.DataModels;
+@{ 
+    const int AccountId = 15;
+    ViewBag.Votes = new VotesModel().IsLike(AccountId, Model.ID);
+}
+<div>
+    @if (!ViewBag.Votes)
+    {
+        <a class="like" id="like">@Model.Like</a>
+    }
+    else
+    {
+        <a id="like"><img src=" ~/Content/images/dislike.PNG" />@Model.Like</a>
+    }
+    <script>
+        $(document).ready(function () {
+            $("#like").click(function () {
+                $("#ViewLike").load('@Url.Action("ViewLike", "Home",new { pId=Model.ID })')
+            });
+        });
+    </script>
+</div>
+
+
+
+
+
+
+
