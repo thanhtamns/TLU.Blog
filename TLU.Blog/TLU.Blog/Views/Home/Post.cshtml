@@ -9,13 +9,13 @@
 }
 <link href="~/AdminContent/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.11.3.min (1).js"></script>
-<script>
+@*<script>
     setInterval(function () {
         $("#CountComment").load("/CountComment/@Model.ID");
         $("#ViewLike").load("/AutoCountLike/@Model.ID");
         $(".response").load("/AutoListComment/@Model.ID ");
     }, 10000);
-</script>
+</script>*@
 <div class="blog-head">
     <h2>@TLUResourceManager.GetValueByKey("Post")</h2>
 </div>
@@ -66,7 +66,7 @@
                             }
                             else
                             {
-                                <a id="like"><img src=" ~/Content/images/dislike.PNG" />@Model.Like</a>
+                                <a id="like"><img src=" ~/Contents/BlogContents/images/dislike.PNG" />@Model.Like</a>
                             }
                             <script>
                                 $(document).ready(function () {
@@ -86,7 +86,7 @@
             @foreach (var item in (new CommentModel().GetCommentOrderByDate(Model.ID) as List<TLU.Blog.Models.DataBase.Comment>))
             {
                 <div class="media response-info">
-                    
+
                     @*Thong Tin*@
 
                     <div class="media-left response-text-left">
@@ -117,23 +117,23 @@
                         <div id="ReplyContent_@item.ID">
                             @foreach (var item2 in (new CommentModel().GetList(item.ID)))
                             {
-                            <div class="media response-info">
-                                <div class="media-left response-text-left">
-                                    <a href="#">
-                                        <img class="media-object" src="@item2.Account.Profile.Avatar" alt="" />
-                                    </a>
-                                    <h5><a href="#">@(new AccountModel().GetNameById(item2.AccountID))</a></h5>
+                                <div class="media response-info">
+                                    <div class="media-left response-text-left">
+                                        <a href="#">
+                                            <img class="media-object" src="@item2.Account.Profile.Avatar" alt="" />
+                                        </a>
+                                        <h5><a href="#">@(new AccountModel().GetNameById(item2.AccountID))</a></h5>
+                                    </div>
+                                    <div class="media-body response-text-right">
+                                        <p>
+                                            @item2.CommentContent
+                                        </p>
+                                        <ul>
+                                            <li>@item2.CommentDate</li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"> </div>
                                 </div>
-                                <div class="media-body response-text-right">
-                                    <p>
-                                        @item2.CommentContent
-                                    </p>
-                                    <ul>
-                                        <li>@item2.CommentDate</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
                             }
                         </div>
                         <div class="media-body response-text-right" id="NewComment_@item.ID">
@@ -146,21 +146,21 @@
                             </div>
                         </div>
                         <script>
-                                $(document).ready(function () {
-                                    $("#CommentReply_@item.ID").click(function () {
-                                        var text = document.getElementById("textarea_@item.ID").value;
-                                        var str = '/ViewReply/' + text +'/' + @item.ID;
-                                        $("#ReplyContent_@item.ID").load(str);
-                                        $("#Reply_@item.ID").toggle();
-                                        document.getElementById("textarea_@item.ID").value="";
-                                    });
+                            $(document).ready(function () {
+                                $("#CommentReply_@item.ID").click(function () {
+                                    var text = document.getElementById("textarea_@item.ID").value;
+                                    var str = '/ViewReply/' + text +'/' + @item.ID;
+                                    $("#ReplyContent_@item.ID").load(str);
+                                    $("#Reply_@item.ID").toggle();
+                                    document.getElementById("textarea_@item.ID").value="";
+                                    $("#CountComment").load("/CountComment/@Model.ID")
                                 });
+                            });
                         </script>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
             }
-            
         </div>
     </div>
     <div class="coment-form">

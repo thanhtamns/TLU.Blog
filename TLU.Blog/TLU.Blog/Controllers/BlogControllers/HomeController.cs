@@ -11,11 +11,6 @@ namespace TLU.Blog.Controllers
 {
     public class HomeController : BaseController
     {
-        private ThangLongEntities _db;
-        public HomeController()
-        {
-            _db = new ThangLongEntities();
-        }
         private const int IdAccount = 15;
         public ActionResult Index()
         {
@@ -163,45 +158,6 @@ namespace TLU.Blog.Controllers
         public ActionResult AutoListComment(int pPostId)
         {
             ViewBag.PostId = pPostId;
-            return View();
-        }
-        [HttpGet]
-        public ActionResult DangKy()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DangKy(Account ac)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Accounts.Add(ac);
-                _db.SaveChanges();
-            }
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult DangNhap()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult DangNhap(FormCollection fm)
-        {
-            string sTaiKhoan = fm.Get("txtTaiKhoan").ToString();
-            string sMatKhau = fm.Get("txtMatKhau").ToString();
-            Account ac1 = _db.Accounts.SingleOrDefault(n => n.UserName == sTaiKhoan && n.Password == sMatKhau);
-            if (ac1 != null)
-            {
-                ViewBag.ThongBao = "Đăng nhập thành công !";
-                Session["TaiKhoan"] = ac1;
-                return View();
-            }
-            ViewBag.ThongBao = "Tài khoản hoặc mật khẩu chưa chính xác !";
             return View();
         }
     }
