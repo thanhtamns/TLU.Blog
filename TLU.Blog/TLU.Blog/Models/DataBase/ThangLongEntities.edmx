@@ -73,7 +73,8 @@
           <Property Name="Code" Type="varchar" MaxLength="10" />
           <Property Name="Sender" Type="int" />
           <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="SendDate" Type="datetime" />
+          <Property Name="Checked" Type="bit" />
+          <Property Name="SendDate" Type="datetime" Nullable="false" />
           <Property Name="LangId" Type="tinyint" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
@@ -83,10 +84,12 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountID" Type="int" />
+          <Property Name="Descrip" Type="nvarchar" MaxLength="100" />
           <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="Time" Type="smalldatetime" />
+          <Property Name="Time" Type="datetime" />
           <Property Name="LangId" Type="tinyint" />
-          <Property Name="IpAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="IpAddress" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -94,11 +97,13 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="Descrip" Type="varchar" MaxLength="100" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
           <Property Name="Image" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="LangId" Type="tinyint" />
-          <Property Name="Url" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Level">
           <Key>
@@ -217,10 +222,10 @@
         <EntityType Name="UpImage">
           <Key>
             <PropertyRef Name="ImageID" />
-            <PropertyRef Name="ImagePost" />
+            <PropertyRef Name="PostID" />
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" />
-          <Property Name="ImagePost" Type="int" Nullable="false" />
+          <Property Name="PostID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Votes">
           <Key>
@@ -234,6 +239,18 @@
           <Property Name="DiskLike" Type="bit" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <Association Name="FK_About_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="About" Type="Self.About" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="About">
+              <PropertyRef Name="Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Account_Level">
           <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -326,6 +343,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Profile_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="Avatar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tag_Topic">
           <End Role="Topic" Type="Self.Topic" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -340,6 +369,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Topic_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UpImage_Image">
           <End Role="Image" Type="Self.Image" Multiplicity="1" />
           <End Role="UpImage" Type="Self.UpImage" Multiplicity="*" />
@@ -349,6 +390,18 @@
             </Principal>
             <Dependent Role="UpImage">
               <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UpImage_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="UpImage" Type="Self.UpImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UpImage">
+              <PropertyRef Name="PostID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -401,6 +454,10 @@
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpImage" EntityType="Self.UpImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Votes" EntityType="Self.Votes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_About_Image1" Association="Self.FK_About_Image1">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="About" EntitySet="About" />
+          </AssociationSet>
           <AssociationSet Name="FK_Account_Level" Association="Self.FK_Account_Level">
             <End Role="Level" EntitySet="Level" />
             <End Role="Account" EntitySet="Account" />
@@ -429,12 +486,24 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Profile_Image1" Association="Self.FK_Profile_Image1">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tag_Topic" Association="Self.FK_Tag_Topic">
             <End Role="Topic" EntitySet="Topic" />
             <End Role="Tag" EntitySet="Tag" />
           </AssociationSet>
+          <AssociationSet Name="FK_Topic_Image1" Association="Self.FK_Topic_Image1">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
           <AssociationSet Name="FK_UpImage_Image" Association="Self.FK_UpImage_Image">
             <End Role="Image" EntitySet="Image" />
+            <End Role="UpImage" EntitySet="UpImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UpImage_Posts" Association="Self.FK_UpImage_Posts">
+            <End Role="Posts" EntitySet="Posts" />
             <End Role="UpImage" EntitySet="UpImage" />
           </AssociationSet>
         </EntityContainer>
@@ -456,6 +525,7 @@
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="LangId" Type="Byte" />
+          <NavigationProperty Name="Image1" Relationship="Self.FK_About_Image1" FromRole="About" ToRole="Image" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -518,7 +588,8 @@
           <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Sender" Type="Int32" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SendDate" Type="DateTime" Precision="3" />
+          <Property Name="Checked" Type="Boolean" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LangId" Type="Byte" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Account" Relationship="Self.FK_FeelBack_Account" FromRole="FeelBack" ToRole="Account" />
@@ -529,10 +600,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountID" Type="Int32" />
+          <Property Name="Descrip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
           <Property Name="LangId" Type="Byte" />
-          <Property Name="IpAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IpAddress" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Account" Relationship="Self.FK_History_Account" FromRole="History" ToRole="Account" />
         </EntityType>
         <EntityType Name="Image">
@@ -541,12 +614,17 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Descrip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Image1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
-          <Property Name="LangId" Type="Byte" />
-          <Property Name="Url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UpImages" Relationship="Self.FK_UpImage_Image" FromRole="Image" ToRole="UpImage" />
+          <NavigationProperty Name="Abouts" Relationship="Self.FK_About_Image1" FromRole="Image" ToRole="About" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_Image1" FromRole="Image" ToRole="Profile" />
+          <NavigationProperty Name="Topics" Relationship="Self.FK_Topic_Image1" FromRole="Image" ToRole="Topic" />
+          <NavigationProperty Name="Posts" Relationship="Self.UpImage" FromRole="Image" ToRole="Posts" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Level">
           <Key>
@@ -597,6 +675,7 @@
           <Property Name="ParentId" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Posts_Account" FromRole="Posts" ToRole="Account" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Posts" FromRole="Posts" ToRole="Comment" />
+          <NavigationProperty Name="Images" Relationship="Self.UpImage" FromRole="Posts" ToRole="Image" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -618,6 +697,7 @@
           <Property Name="Hoppy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Profile" FromRole="Profile" ToRole="Account" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Profile_Image1" FromRole="Profile" ToRole="Image" />
         </EntityType>
         <EntityType Name="Rule">
           <Key>
@@ -666,16 +746,8 @@
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="LangId" Type="Byte" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Topic_Image1" FromRole="Topic" ToRole="Image" />
           <NavigationProperty Name="Tags" Relationship="Self.FK_Tag_Topic" FromRole="Topic" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="UpImage">
-          <Key>
-            <PropertyRef Name="ImageID" />
-            <PropertyRef Name="ImagePost" />
-          </Key>
-          <Property Name="ImageID" Type="Int32" Nullable="false" />
-          <Property Name="ImagePost" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Image" Relationship="Self.FK_UpImage_Image" FromRole="UpImage" ToRole="Image" />
         </EntityType>
         <EntityType Name="Vote">
           <Key>
@@ -689,6 +761,18 @@
           <Property Name="DiskLike" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
+        <Association Name="FK_About_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="About" Type="Self.About" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="About">
+              <PropertyRef Name="Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Account_Level">
           <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -781,15 +865,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UpImage_Image">
-          <End Role="Image" Type="Self.Image" Multiplicity="1" />
-          <End Role="UpImage" Type="Self.UpImage" Multiplicity="*" />
+        <Association Name="FK_Profile_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Image">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UpImage">
-              <PropertyRef Name="ImageID" />
+            <Dependent Role="Profile">
+              <PropertyRef Name="Avatar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Image1">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="ImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -807,6 +903,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UpImage">
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="ThangLongEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Abouts" EntityType="Self.About" />
           <EntitySet Name="Accounts" EntityType="Self.Account" />
@@ -823,8 +923,11 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tags" EntityType="Self.Tag" />
           <EntitySet Name="Topics" EntityType="Self.Topic" />
-          <EntitySet Name="UpImages" EntityType="Self.UpImage" />
           <EntitySet Name="Votes" EntityType="Self.Vote" />
+          <AssociationSet Name="FK_About_Image1" Association="Self.FK_About_Image1">
+            <End Role="Image" EntitySet="Images" />
+            <End Role="About" EntitySet="Abouts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Account_Level" Association="Self.FK_Account_Level">
             <End Role="Level" EntitySet="Levels" />
             <End Role="Account" EntitySet="Accounts" />
@@ -853,13 +956,21 @@
             <End Role="Posts" EntitySet="Posts" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_UpImage_Image" Association="Self.FK_UpImage_Image">
+          <AssociationSet Name="FK_Profile_Image1" Association="Self.FK_Profile_Image1">
             <End Role="Image" EntitySet="Images" />
-            <End Role="UpImage" EntitySet="UpImages" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Image1" Association="Self.FK_Topic_Image1">
+            <End Role="Image" EntitySet="Images" />
+            <End Role="Topic" EntitySet="Topics" />
           </AssociationSet>
           <AssociationSet Name="FK_Tag_Topic" Association="Self.FK_Tag_Topic">
             <End Role="Topic" EntitySet="Topics" />
             <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="UpImage" Association="Self.UpImage">
+            <End Role="Image" EntitySet="Images" />
+            <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -980,6 +1091,7 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
                 <ScalarProperty Name="SendDate" ColumnName="SendDate" />
                 <ScalarProperty Name="LangId" ColumnName="LangId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -991,23 +1103,27 @@
               <MappingFragment StoreEntitySet="History">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Descrip" ColumnName="Descrip" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="LangId" ColumnName="LangId" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="ThangLongModel.Image">
               <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Descrip" ColumnName="Descrip" />
                 <ScalarProperty Name="Image1" ColumnName="Image" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LangId" ColumnName="LangId" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1132,14 +1248,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UpImages">
-            <EntityTypeMapping TypeName="ThangLongModel.UpImage">
-              <MappingFragment StoreEntitySet="UpImage">
-                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-                <ScalarProperty Name="ImagePost" ColumnName="ImagePost" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Votes">
             <EntityTypeMapping TypeName="ThangLongModel.Vote">
               <MappingFragment StoreEntitySet="Votes">
@@ -1153,6 +1261,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="UpImage" TypeName="ThangLongModel.UpImage" StoreEntitySet="UpImage">
+            <EndProperty Name="Image">
+              <ScalarProperty Name="ID" ColumnName="ImageID" />
+            </EndProperty>
+            <EndProperty Name="Posts">
+              <ScalarProperty Name="ID" ColumnName="PostID" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ThangLongModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ThangLongModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ThangLongModel.Store.sp_dropdiagram" />

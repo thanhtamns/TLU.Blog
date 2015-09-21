@@ -24,5 +24,7 @@ namespace TLU.Blog.Models.DataBase
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<byte> LangId { get; set; }
+    
+        public virtual Image Image1 { get; set; }
     }
 }

@@ -16,10 +16,12 @@ namespace TLU.Blog.Models.DataBase
     {
         public int ID { get; set; }
         public Nullable<int> AccountID { get; set; }
+        public string Descrip { get; set; }
         public string Content { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
         public Nullable<byte> LangId { get; set; }
-        public string IpAddress { get; set; }
+        public Nullable<int> IpAddress { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual Account Account { get; set; }
     }

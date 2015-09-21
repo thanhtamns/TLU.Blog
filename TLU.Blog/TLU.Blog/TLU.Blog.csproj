@@ -1195,6 +1195,7 @@
     <Content Include="Contents\BlogContents\images\w2.jpg" />
     <Content Include="Contents\BlogContents\images\w3.jpg" />
     <Content Include="Contents\BlogContents\images\w4.jpg" />
+    <Content Include="Contents\BlogContents\jquery-1.11.3.min %281%29.js" />
     <Content Include="Contents\BlogContents\js\bootstrap.js" />
     <Content Include="Contents\BlogContents\js\jquery.fancybox.js" />
     <Content Include="Contents\BlogContents\js\jquery.min.js" />
@@ -1206,30 +1207,29 @@
     <Content Include="Contents\BlogContents\touchTouch.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
+    <Content Include="Image\11990542_405300116328142_8274522676991224521_n.jpg" />
+    <Content Include="Image\changeImage.PNG" />
     <Content Include="Models\DataBase\ThangLongEntities.Context.tt">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
       <LastGenOutput>ThangLongEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataBase\ThangLongEntities.edmx.diagram">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Models\DataBase\ThangLongEntities.tt">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
       <LastGenOutput>ThangLongEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminControllers\AdminAboutController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminAccountController.cs" />
-    <Compile Include="Controllers\AdminControllers\AdminAccoutController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminCommentController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminConfigsController.cs" />
-    <Compile Include="Controllers\AdminControllers\AdminController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminFeelBackController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminHistoryController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminHomeController.cs" />
@@ -1243,7 +1243,6 @@
     <Compile Include="Controllers\AdminControllers\AdminTagController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminTopicController.cs" />
     <Compile Include="Controllers\AdminControllers\AdminUpImageController.cs" />
-    <Compile Include="Controllers\AdminControllers\AdminVotesController.cs" />
     <Compile Include="Controllers\BlogControllers\BaseController.cs" />
     <Compile Include="Controllers\BlogControllers\HomeController.cs" />
     <Compile Include="Controllers\BlogControllers\LogInController.cs" />
@@ -1303,34 +1302,36 @@
       <DependentUpon>ThangLongEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase\ThangLongEntities.Context.cs">
-      <DependentUpon>ThangLongEntities.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThangLongEntities.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase\ThangLongEntities.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThangLongEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase\ThangLongEntities.Designer.cs">
-      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase\Topic.cs">
-      <DependentUpon>ThangLongEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBase\UpImage.cs">
       <DependentUpon>ThangLongEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase\Vote.cs">
       <DependentUpon>ThangLongEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\AboutModel.cs" />
     <Compile Include="Models\DataModels\AccountModel.cs" />
     <Compile Include="Models\DataModels\CommentModel.cs" />
+    <Compile Include="Models\DataModels\FeelBackModel.cs" />
+    <Compile Include="Models\DataModels\HistoryModel.cs" />
+    <Compile Include="Models\DataModels\ImageModel.cs" />
     <Compile Include="Models\DataModels\PostModel.cs" />
     <Compile Include="Models\DataModels\TopicModel.cs" />
     <Compile Include="Models\DataModels\VotesModel.cs" />
+    <Compile Include="Models\DataViews\AccountView.cs" />
     <Compile Include="Models\DataViews\PostView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\TLUResource.Designer.cs" />
@@ -1590,10 +1591,8 @@
     <Content Include="Views\AdminAccount\Home.cshtml" />
     <Content Include="Views\AdminComment\Home.cshtml" />
     <Content Include="Views\AdminConfigs\Home.cshtml" />
-    <Content Include="Views\AdminFeelBack\Home.cshtml" />
-    <Content Include="Views\AdminHistory\Home.cshtml" />
     <Content Include="Views\AdminHome\Home.cshtml" />
-    <Content Include="Views\AdminImage\Home.cshtml" />
+    <Content Include="Views\AdminImage\Index.cshtml" />
     <Content Include="Views\AdminLevel\Home.cshtml" />
     <Content Include="Views\AdminLogIn\logIn.cshtml" />
     <Content Include="Views\AdminNavigation\Home.cshtml" />
@@ -1604,6 +1603,25 @@
     <Content Include="Views\AdminTopic\Home.cshtml" />
     <Content Include="Views\AdminUpImage\Home.cshtml" />
     <Content Include="Views\AdminVotes\Home.cshtml" />
+    <Content Include="Views\AdminAbout\Create.cshtml" />
+    <Content Include="Views\AdminAbout\Index.cshtml" />
+    <Content Include="Views\AdminAbout\Edit.cshtml" />
+    <Content Include="Views\AdminFeelBack\Details.cshtml" />
+    <Content Include="Views\AdminFeelBack\Index.cshtml" />
+    <Content Include="Views\AdminFeelBack\Delete.cshtml" />
+    <Content Include="Views\AdminHistory\Index.cshtml" />
+    <EntityDeploy Include="Models\DataBase\ThangLongEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ThangLongEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataBase\ThangLongEntities.edmx.diagram">
+      <DependentUpon>ThangLongEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\AdminHistory\Details.cshtml" />
+    <Content Include="Views\AdminHistory\Hide.cshtml" />
+    <Content Include="Views\AdminImage\Details.cshtml" />
+    <Content Include="Views\AdminImage\Edit.cshtml" />
+    <Content Include="Views\LogIn\Text.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1613,10 +1631,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\" />
     <Folder Include="Views\AdminBase\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\LogIn\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1624,12 +1640,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resource\TLUResource.en.resx" />
     <EmbeddedResource Include="Resource\TLUResource.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\DataBase\ThangLongEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ThangLongEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

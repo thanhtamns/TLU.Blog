@@ -18,5 +18,9 @@ namespace TLU.Blog.Controllers
         {
             return View();
         }
+        public ActionResult Text()
+        {
+            return View();
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace TLU.Blog.AdminControllers
         // GET: /AdminComment/
         public ActionResult Home()
         {
-
             return View();
         }
 	}

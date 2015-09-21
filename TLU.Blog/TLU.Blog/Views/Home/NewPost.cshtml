@@ -83,12 +83,6 @@
                                 $('#Image').attr('src', e.target.result);
                             };
                         });
-                        $("#addImage").click(function () {
-                            var a = $("#selestImage").val();
-                            $.post('@Url.Action("UpLoad", "Home")', { suggest: txt }, function (result) {
-                                $(".col-sm-10").html(result);
-                            });
-                        });
                     });
                 </script>
                 </div><!-- /.box-body -->

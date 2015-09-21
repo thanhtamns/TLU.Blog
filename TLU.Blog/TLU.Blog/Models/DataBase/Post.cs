@@ -18,6 +18,7 @@ namespace TLU.Blog.Models.DataBase
         public Post()
         {
             this.Comments = new HashSet<Comment>();
+            this.Images = new HashSet<Image>();
         }
     
         public int ID { get; set; }
@@ -38,5 +39,7 @@ namespace TLU.Blog.Models.DataBase
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

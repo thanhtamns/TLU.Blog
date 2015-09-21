@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TLU.Blog.Models.DataBase;
+using TLU.Blog.Models.DataViews;
 namespace TLU.Blog.Models.DataModels
 {
     public class AccountModel
@@ -26,6 +27,59 @@ namespace TLU.Blog.Models.DataModels
                 str = Object.Profile.FirstName + ' ' + Object.Profile.SurName;
             }
             return str;
+        }
+        public Profile GetProfileById(int pAccountId)
+        {
+            return _db.Accounts.Find(pAccountId).Profile;
+        }
+        public List<History> GetHistoryById(int pAccountId)
+        {
+            return _db.Accounts.Find(pAccountId).Histories.ToList();
+        }
+        public bool ChangeProfile(int pAccountId, Profile pNewProfile)
+        {
+            try
+            {
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool CreateAccount (AccountView pNewAccount )
+        {
+            try
+            {
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public string LogInAdmin(Account pAccountAdmin)
+        {
+            try
+            {
+                return "";
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        public string LogInBlog(Account pAccountBlog)
+        {
+            try
+            {
+                return "";
+            }
+            catch
+            {
+                return "";
+            }
         }
     }
 }

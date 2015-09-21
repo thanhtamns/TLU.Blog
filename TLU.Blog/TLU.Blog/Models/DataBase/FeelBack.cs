@@ -19,7 +19,8 @@ namespace TLU.Blog.Models.DataBase
         public string Code { get; set; }
         public Nullable<int> Sender { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> SendDate { get; set; }
+        public Nullable<bool> Checked { get; set; }
+        public System.DateTime SendDate { get; set; }
         public Nullable<byte> LangId { get; set; }
         public Nullable<bool> IsActive { get; set; }
     

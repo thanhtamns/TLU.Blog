@@ -12,13 +12,7 @@ namespace TLU.Blog
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "AutoCountLike",
-                url: "AutoCountLike/{pPostId}",
-                defaults: new { controller = "Home", action = "AutoCountLike", pPostId = UrlParameter.Optional }
-            );
-
+            
             routes.MapRoute(
                 name: "AutoListComment",
                 url: "AutoListComment/{pPostId}",
@@ -41,12 +35,6 @@ namespace TLU.Blog
                 name: "ViewReply",
                 url: "ViewReply/{pReplyContent}/{pCommentId}",
                 defaults: new { controller = "Home", action = "ViewReply", pReplyContent = UrlParameter.Optional, pCommentId = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Home",
-                url: "{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

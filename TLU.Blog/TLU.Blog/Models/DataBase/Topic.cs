@@ -34,6 +34,7 @@ namespace TLU.Blog.Models.DataBase
         public Nullable<bool> IsActive { get; set; }
         public Nullable<byte> LangId { get; set; }
     
+        public virtual Image Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
     }

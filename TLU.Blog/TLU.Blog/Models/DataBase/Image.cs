@@ -17,18 +17,29 @@ namespace TLU.Blog.Models.DataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Image()
         {
-            this.UpImages = new HashSet<UpImage>();
+            this.Abouts = new HashSet<About>();
+            this.Profiles = new HashSet<Profile>();
+            this.Topics = new HashSet<Topic>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Descrip { get; set; }
         public string Image1 { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> EditBy { get; set; }
+        public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<byte> LangId { get; set; }
         public string Url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UpImage> UpImages { get; set; }
+        public virtual ICollection<About> Abouts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Topic> Topics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

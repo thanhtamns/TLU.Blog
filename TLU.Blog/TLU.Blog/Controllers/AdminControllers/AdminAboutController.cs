@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using TLU.Blog.Models.DataBase;
+using TLU.Blog.Models.DataModels;
 namespace TLU.Blog.AdminControllers
 {
     public class AdminAboutController : Controller
     {
         // GET: AdminAbout
-        public ActionResult Index()
+        public ActionResult Index(int Page=1,int PageSize=10)
         {
-            return View();
+            return View(new AboutModel().GetPageListAbout(Page,PageSize));
         }
 
         // GET: AdminAbout/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(new AboutModel().GetAboutById(id));
         }
 
         // GET: AdminAbout/Create
@@ -28,12 +29,16 @@ namespace TLU.Blog.AdminControllers
 
         // POST: AdminAbout/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(About pNewAbout)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                HttpPostedFileBase file = HttpContext.Request.Files["pImage"];
+                string a = "/Image/" + file.FileName;
+                string b = Server.MapPath(a);
+                file.SaveAs(b);
+                var Image = new Image();
+                Image.Image1 = a;
                 return RedirectToAction("Index");
             }
             catch
